@@ -1,4 +1,23 @@
 {
+  "name": "workout",
+  "version": "1.0.0",
+  "main": "workout.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "npx nodemon workout.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjc7ru/workout.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjc7ru/workout/issues"
+  },
   "dependencies": {
     "connect-loki": "^1.2.0",
     "express": "^4.18.1",
@@ -8,5 +27,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
-  }
+  },
+  "homepage": "https://github.com/jjc7ru/workout#readme",
+  "description": ""
 }
