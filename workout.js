@@ -3,6 +3,9 @@ const morgan = require('morgan');
 const session = require("express-session");
 const store = require("connect-loki");
 const flash = require("express-flash");
+const dbQuery = require("./lib/db-query");
+const PgPersistence = require("./lib/pg-persistence");
+const catchError = require("./lib/catch-error");
 
 const app = express();
 const port = 3000;
@@ -29,11 +32,53 @@ app.use(session({
   store: new LokiStore({}),
 }));
 
+//temporary
+app.use((req, res, next) => {
+  req.session.username = 'admin';
+  next();
+});
+
 app.use(flash());
 
-app.get("/", (req, res) => {
-  res.render("lists");
+app.use((req, res, next) => {
+  res.locals.store = new PgPersistence(req.session);
+  next();
 });
+
+app.get("/", (req, res) => {
+  res.redirect("/groups");
+});
+
+app.get("/groups", async (req, res) => {
+  let store = res.locals.store;
+  let exerciseGroups = await store.loadAllExerciseGroups();
+  res.render("groups", {
+    exerciseGroups,
+  });
+});
+
+app.post("/groups/create", 
+  catchError(async (req, res) => {
+    let store = res.locals.store;
+    let group = req.body.group;
+    let exerciseGroup = await store.createExerciseGroup(group);
+    if (!exerciseGroup) throw new Error("Not found.");
+    res.redirect("/groups");
+  })
+);
+
+app.get("/groups/:groupId", 
+  catchError(async (req, res) => {
+    let store = res.locals.store;
+    let groupId = req.params.groupId;
+    let exerciseGroup = await store.loadExerciseGroup(groupId);
+    
+    if (!exerciseGroup) throw new Error("Not found.");
+    res.render("exercises", {
+      exerciseGroup: exerciseGroup[0],
+    });
+  })
+);
 
 // Error handler
 app.use((err, req, res, _next) => {

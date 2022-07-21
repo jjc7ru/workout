@@ -1,0 +1,19 @@
+extends layout
+
+block main
+  dl 
+    dt 
+      h1 Exercise Groups 
+    
+    each exerciseGroup in exerciseGroups
+      dd 
+        a(href=`/groups/${exerciseGroup.id}`) #{exerciseGroup.exercise_group_name}
+
+  form(action="/groups/create", method="post")
+    dl 
+      dt 
+        label(for="group") Create Exercise Group
+      dd 
+        input(type="text" name="group")
+
+    button(type="submit") Create
