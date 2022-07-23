@@ -1,0 +1,45 @@
+extends layout 
+
+block main
+  h1 #{exerciseGroup.exercise_group_name}
+  table
+    thead 
+      tr 
+        th(scope="col") 
+        th(scope="col") Exercises
+        th(scope="col") Sets
+        th(scope="col") Reps
+        th(scope="col")
+        th(scope="col") 
+    tbody 
+      each exercise, index in exerciseGroup.exercises 
+        tr
+          th(scope="row") #{index + 1}
+          td 
+            a(href=`/groups/${exerciseGroup.id}/exercises/${exercise.id}`) #{exercise.exercise_name}
+          td #{exercise.sets}
+          td #{exercise.reps}
+          td 
+            a(href=`/groups/${exerciseGroup.id}/exercises/${exercise.id}/edit`) 
+              i.fa-solid.fa-pen-to-square
+          td
+            form(action=`/groups/${exerciseGroup.id}/exercises/${exercise.id}/destroy`, method="post") 
+              button(type="submit") 
+                i.fa-solid.fa-trash-can
+  
+  form(action=`/groups/${exerciseGroup.id}/create`, method="post")
+    dl 
+      dt 
+        label(for="exercise") Exercise Name
+      dd 
+        input(type="text" name="exercise")
+      dt 
+        label(for="sets") Sets 
+      dd 
+        input(type="text" name="sets")
+      dt 
+        label(for="reps") Reps 
+      dd 
+        input(type="text" name="reps")
+    
+    button(type="submit") Create

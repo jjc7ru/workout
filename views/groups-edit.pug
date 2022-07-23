@@ -1,0 +1,11 @@
+extends layout 
+
+block main 
+  form(action=`/groups/${groupId}/edit`, method="post") 
+    dl
+      dt
+        label(for="group_name") Exercise Group Name 
+      dd         
+        input(type="text" name="group_name" placeholder=group.exercise_group_name)
+    button(type="submit") Update
+    a(href="/groups") Cancel

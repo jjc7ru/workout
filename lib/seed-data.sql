@@ -25,3 +25,23 @@ INSERT INTO exercises (exercise_name, sets, reps, exercise_group_id, username)
          ('Dumbbell Rear Delt Fly', 2, 8, 3, 'admin'),
          ('Zottman Curl', 2, 8, 3, 'admin'),
          ('Close Grip Dumbbell Press', 2, 8, 3, 'admin');
+
+INSERT INTO user_exercises (set, reps, weight, exercise_date, exercise_id, username)
+  VALUES (1, 10, 30, '2020-07-01', 1, 'admin'),
+         (2, 10, 30, '2020-07-01', 1, 'admin'),
+         (3, 10, 30, '2020-07-01', 1, 'admin'),
+         (1, 10, 40, '2020-07-01', 2, 'admin'),
+         (2, 10, 40, '2020-07-01', 2, 'admin'),
+         (3, 10, 40, '2020-07-01', 2, 'admin'),
+         (1, 10, 35, '2020-07-01', 3, 'admin'),
+         (2, 10, 35, '2020-07-01', 3, 'admin'),
+         (3, 10, 35, '2020-07-01', 3, 'admin'),
+         (1, 10, 30, '2020-07-03', 1, 'admin'),
+         (2, 10, 30, '2020-07-03', 1, 'admin'),
+         (3, 10, 30, '2020-07-03', 1, 'admin'),
+         (1, 10, 40, '2020-07-03', 2, 'admin'),
+         (2, 10, 40, '2020-07-03', 2, 'admin'),
+         (3, 10, 40, '2020-07-03', 2, 'admin'),
+         (1, 10, 35, '2020-07-03', 3, 'admin'),
+         (2, 10, 35, '2020-07-03', 3, 'admin'),
+         (3, 10, 35, '2020-07-03', 3, 'admin');

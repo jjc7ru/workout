@@ -1,24 +1,51 @@
-extends layout 
+extends layout
 
-block main
-  table
+block main 
+  h1 #{date}
+  h2 #{exerciseName}
+
+  if exercise.user_exercises[0] !== undefined
+    table 
+      thead 
+        tr 
+          th(scope="col") Set #
+          th(scope="col") Reps 
+          th(scope="col") Weight
+      tbody 
+        each set in exercise.user_exercises
+          tr   
+            td #{set.set}
+            td #{set.reps}
+            td #{set.weight}
+
+  h1 Today 
+  h2 #{today}
+  table 
     thead 
       tr 
-        th(scope="col") 
-        th(scope="col") Exercises
-        th(scope="col") Sets
-        th(scope="col") Reps
-    tbody 
-      each exercise, index in exerciseGroup.exercises 
-        tr
-          th(scope="row") #{index + 1}
-          td #{exercise.exercise_name}
-          td #{exercise.sets}
+        th(scope="col") Set #
+        th(scope="col") Reps 
+        th(scope="col") Weight
+    tbody
+      each exercise in exerciseToday
+        tr 
+          td #{exercise.set}
           td #{exercise.reps}
-  
-  form(action=`/groups/${exerciseGroup.id}/create`, method="post")
+          td #{exercise.weight}
+    
+  form(action=`/groups/${exercise.exercise_group_id}/exercises/${exercise.id}/create`, method="post")
     dl 
       dt 
-        label(for="") Exercise Name
+        label(for="set") Set #
       dd 
-        input(type="text")
+        input(type="text" name="set")
+      dt 
+        label(for="reps") Reps 
+      dd 
+        input(type="text" name="reps")
+      dt 
+        label(for="weight") Weight 
+      dd 
+        input(type="text" name="weight")
+
+    button(type="submit") Create

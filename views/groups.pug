@@ -8,7 +8,13 @@ block main
     each exerciseGroup in exerciseGroups
       dd 
         a(href=`/groups/${exerciseGroup.id}`) #{exerciseGroup.exercise_group_name}
+        form(action=`/groups/${exerciseGroup.id}/destroy`, method="post")
+          button(type="submit")
+            i.fa-solid.fa-trash-can
+        a(href=`/groups/${exerciseGroup.id}/edit`) 
+          i.fa-solid.fa-pen-to-square
 
+                
   form(action="/groups/create", method="post")
     dl 
       dt 
