@@ -170,6 +170,12 @@ app.post("/groups/:groupId/exercises/:exerciseId/create",
   })
 );
 
+app.get("/groups/:groupId/exercises/:exerciseId/edit", 
+  catchError(async (req, res) => {
+    
+  })
+)
+
 // Error handler
 app.use((err, req, res, _next) => {
   console.log(err); // Writes more extensive information to the console log
